@@ -11,4 +11,4 @@
 </div>
 <br>
 
-**Abstract:-** Trying to reproduce the paper on Amharic LLaMa and LLaVa using different Architectures and Language Models.
+**Abstract:-** Large language models (LLMs) like GPT, Llama and others have demonstrated unprecedented capabilities in language understanding and generation. These models excel at a variety of tasks, but primarily in languages that are well-represented in their training sets — such as English. However, they struggle when it comes to low-resource languages like Amharic, the most widely spoken language in Ethiopia with approximately 60 million speakers worldwide. In the paper called Amharic Llama the authors tried to explore taining LLaMA-2 to understand and generated Amharic text. Now we are attempting to reproduce the paper using different Architectures, Language Models and settings.
