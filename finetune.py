@@ -92,6 +92,29 @@ def finetune():
     model = PeftModel.from_pretrained(model, PT_DIR)
     model.print_trainable_parameters()
 
+    '''
+    Initialize Tokenizer and Model 
+        Tokenizer: A 'LlamaTokenizer' is initialized using pre-trained weights from the specified directory. 
+        The tokenizer is essential for converting text data into a format that the model can process.
+    
+        Model :- A LlamaForCausalLM 
+        train_dataset = get_preprocessed_dataset(tokenizer, amharic_dataset, 'train') :- The function then retrieves a pre-processed training dataset tailod for the tokenizer
+        this step is crucial for ensuring the data is in the correct format for the model
+            Dataset: The amharic_dataset parameter likely refers to a dataset containing Amharic language text.
+            Purpose: The 'train' parameter indicates that the function should prepare the training portion of the dataset
+
+    
+        Check and Adjust Embedding Size:
+
+            It checks if the tokenizer's vocabulary size matches the model's embedding size. 
+            If not, it resizes the model's token embeddings to ensure compatibility between the model architecture and the tokenizer.    
+
+    
+    '''
+    
+    
+
+    
     lora_config = LoraConfig(
         task_type = TaskType.CAUSAL_LM,
         inference_mode = False,
@@ -101,6 +124,20 @@ def finetune():
         target_modules = ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj","down_proj", "up_proj"]
 
     )
+
+    '''
+    
+    Configure LoRA:
+
+        A LoraConfig object is created to specify parameters for Low-Rank Adaptation (LoRA), 
+        a technique for adapting large pre-trained models with minimal parameter increase. 
+        It targets specific components (like parts of the attention mechanism) for adaptation and specifies other details like rank, adaptation intensity, dropout rate,
+         and specific modules to adapt and save. This can potentially enhance the model’s ability to specialize on new tasks with relatively low overhead.
+
+    
+    '''
+
+
 
     enable_profiler = False
     config = {
