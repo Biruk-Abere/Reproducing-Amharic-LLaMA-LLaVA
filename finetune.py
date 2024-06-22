@@ -112,9 +112,6 @@ def finetune():
     
     '''
     
-    
-
-    
     lora_config = LoraConfig(
         task_type = TaskType.CAUSAL_LM,
         inference_mode = False,
