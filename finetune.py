@@ -1,14 +1,23 @@
 import torch 
 from contextlib import nullcontext
 
+# from transformers import(
+#     LlamaForCausalLM,
+#     LlamaTokenizer,
+#     TrainerCallback,
+#     default_data_collator,
+#     Trainer, 
+#     TrainingArguments
+
+# )
+
 from transformers import(
-    LlamaForCausalLM,
-    LlamaTokenizer,
+    GPT2LMHeadModel,
+    GPT2Tokenizer,
     TrainerCallback,
     default_data_collator,
-    Trainer, 
+    Trainer,
     TrainingArguments
-
 )
 
 '''
@@ -69,14 +78,22 @@ that will be updated during training
 
 
 def finetune():
-    LLAMA_DIR = '/path/to/llama/weights'
+    # LLAMA_DIR = '/path/to/llama/weights' # llama weights
+    # PT_DIR = '/path/to/pt/weights'
+    # OUTPUT_DIR = '/path/to/output' # store the output
+
+    GPT_DIR = '/path/to/gpt/weights' # GPT weights
     PT_DIR = '/path/to/pt/weights'
-    OUTPUT_DIR = '/path/to/output'
+    OUTPUT_DIR = '/path/to/output' # store the output
 
 
-    tokenizer = LlamaTokenizer.from_pretrained(LLAMA_DIR)
-    model = LlamaForCausalLM.from_pretrained(LLAMA_DIR, load_in_8bit = False, device_map = 'auto', torch_dtype = torch.float16)
+    # tokenizer = LlamaTokenizer.from_pretrained(LLAMA_DIR)
+    # model = LlamaForCausalLM.from_pretrained(LLAMA_DIR, load_in_8bit = False, device_map = 'auto', torch_dtype = torch.float16)
 
+    tokenizer = GPT2Tokenizer.from_pretrained(GPT_DIR)
+    model = GPT2LMHeadModel.from_pretrained(GPT_DIR, load_in_8bit=False, device_map='auto', torch_dtype=torch.float16)
+
+    
     train_dataset = get_preprocessed_dataset(tokenizer, amharic_dataset, 'train')
     model.train()
 
